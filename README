@@ -1,0 +1,32 @@
+IIITA Library search
+search for booklist. Sort it by their availability such that available books will come first. extract the required information.
+for detail information to how to use it read 'manfile.txt' or run the command.
+
+	./query --help
+
+In linux do the following :-
+	chmod +x query
+	./query --help 
+
+	--Now enjoy
+
+In windows , if python is installed , try the command
+
+	python query.py --help
+
+	--Now enjoy
+
+Note :- This programme was initially written to make life easier and prevent myself from doing the hectic search for available books in IIITA library.
+	Now it has been modified to fulfill many requirements.This programme has various scope and it can be used in many ways.
+	It can be used for search in multiple fields instead of just doing search in 'title' or 'author' or 'accno' etc. Eg :- one can use this programme to
+	search for any book that is a book of networking and written by stevens."manfile.txt" has detailed description of how to use this programme.
+	It can be modified in many ways to make good use of it.	Any suggestion and useful modification is always welcome.
+	
+--WARNING--
+You are not allowed to use this programme for any hack purpose (But to do that you will have to figure it out).You are responsible for your own deeds.
+
+--author
+Anand Kumar
+http://linkinAnand.blogspot.com
+mailto:-linkinAnand@gmail.com
+profile:- http://profile.iiita.ac.in/IIT2008090
