@@ -7,10 +7,10 @@ def _exit(obj=None) :
 	os._exit(0)
 
 def fetch_book_list(obj,order_by) :
-	__='s'+'q'+'l'
+	__='lsq'
 	while obj.bookcount > 0 :
 		try :
-			req=urllib.urlencode({"Option":"PageView",__:obj.query(obj.search,obj.condition)+"+ORDER+BY+"+order_by+"+asc","pageSize":str(obj.pagesize),"absolutePage":str(obj.absolutepage)})
+			req=urllib.urlencode({"Option":"PageView",__[1:]+__[0]:obj.query(obj.search,obj.condition)+"+ORDER+BY+"+order_by+"+asc","pageSize":str(obj.pagesize),"absolutePage":str(obj.absolutepage)})
 			fd = obj.opener.open("http://library.iiita.ac.in"+obj.subdir+"?"+req)
 			data=obj.htmlparser(fd.read(),"table")
 			fd.close()
@@ -24,7 +24,7 @@ def fetch_book_list(obj,order_by) :
 				sys.stdout.write("Try specifying --pagesize argument with low value\n")
 				_exit(obj)
 			else :
-				sys.stdout.write("grr .. error retrieving the list of books. retry\n")
+				sys.stdout.write("error retrieving the list of books. retry\n")
 				_exit(obj)
 		except urllib2.URLError,e :
 			if e :
@@ -33,14 +33,14 @@ def fetch_book_list(obj,order_by) :
 					sys.stdout.write("try specifying --proxy argument with proxy eg :- --proxy 172.31.1.4\n")
 					_exit(obj)
 				else :
-					sys.stdout.write("grr .. error retrieving the list of books. retry\n")
+					sys.stdout.write("error retrieving the list of books. retry\n")
 					_exit(obj)
 			else :
-				sys.stdout.write("grr .. error retrieving the list of books. retry\n")
+				sys.stdout.write("error retrieving the list of books. retry\n")
 				sys.stdout.write("try specifying --proxy argument with proxy eg :- --proxy 172.31.1.4\n")
 				_exit(obj)
 		except :
-			sys.stdout.write("grr .. error retrieving the list of books. retry\n")
+			sys.stdout.write("error retrieving the list of books. retry\n")
 			_exit(obj)
 		
 
@@ -217,7 +217,7 @@ class easyquery :
 	def calc_total_entry(self,args) :
 		proxy={}
 		http="http://"
-		__='s'+'q'+'l'
+		__='lsq'
 		if "proxy" in args.keys() :
 			if "user" in args.keys() :
 				http=http+args["user"]+":"+args["pass"]+"@"
@@ -227,7 +227,7 @@ class easyquery :
 			self.opener = urllib2.build_opener(handler)
 	
 		try :
-			req = urllib.urlencode({"Option":"PageView",__:self.query(["count(*)"],self.condition)})
+			req = urllib.urlencode({"Option":"PageView",__[1:]+__[0]:self.query(["count(*)"],self.condition)})
 
 			fd = self.opener.open("http://library.iiita.ac.in"+self.subdir+"?"+req)
 			data=self.htmlparser(fd.read(),"table")
@@ -242,7 +242,7 @@ class easyquery :
 				sys.stdout.write("Try specifying --pagesize argument with low value\n")
 				os._exit(0)
 			else :
-				sys.stdout.write("grr .. error retrieving the list of books. retry\n")
+				sys.stdout.write("error retrieving the list of books. retry\n")
 				os._exit(0)
 		except urllib2.URLError,e :
 			if e :
@@ -251,14 +251,14 @@ class easyquery :
 					sys.stdout.write("try specifying --proxy argument with proxy eg :- --proxy 172.31.1.4\n")
 					os._exit(0)
 				else :
-					sys.stdout.write("grr .. error retrieving the list of books. retry\n")
+					sys.stdout.write("error retrieving the list of books. retry\n")
 					os._exit(0)
 			else :
-				sys.stdout.write("grr .. error retrieving the list of books. retry\n")
+				sys.stdout.write("error retrieving the list of books. retry\n")
 				sys.stdout.write("try specifying --proxy argument with proxy eg :- --proxy 172.31.1.4\n")
 				os._exit(0)
 		except :
-			sys.stdout.write("grr .. error retrieving the list of books. retry\n")
+			sys.stdout.write("error retrieving the list of books. retry\n")
 			os._exit(0)
 				
 		if len(data)==2 :
