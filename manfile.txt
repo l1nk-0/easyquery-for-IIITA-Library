@@ -1,0 +1,70 @@
+Usage query [OPTION] .....
+A tool to query IIITA-library
+[arguments and options]
+
+--help     : displays the helpmenu and exits
+ 
+--field    : specify the field and their pattern to be searched.
+	     eg :- 'title=*networking*|author=*herbert+schildt*' will search for all entries where 
+ 	     'title' have netwoking (eg :- Unix networking book)in it or author has ste_ns 
+ 	     (eg :- Richard stevens and ) in it.
+  	     #IMP# what is '*' , '_' and '+'
+		'_' :- It matches any single character at that place. eg :- ste_ens matches stevens,steans,stefns etc.
+		'*' :- It matches one or more character. eg :- *networking* matches 'Unix networking book',
+		       'Book of networking','networking guide' etc.
+		'+' :- If their is space between input data use '+' in the place of <space>
+		       eg :- 'author=*herbert schildt*' should be written as 'author=*herbert+schildt*'
+		Note :- if the field to be searched is exact match give it as it is otherwise put '*' in front nad back of it.
+	     fields are :-
+		title         :- name of the book
+		author        :- books author
+		shelfno       :- shelf number of book
+		code          :- ISBN code of the book
+		accno         :- books accession number
+		reserved      :- whether book is reserved or not.It can have only two value => True/False
+		edition       :- edition of the book
+		publication   :- books publication
+		price         :- price of the book
+		subjecttopics :- topic in the book
+		classno       :- class number of the book
+
+	     searching on multiple fields ('|' and '&'):-
+		'|' stands for 'OR' and '&' stands for 'AND'
+		1) for searching a book of image processing and written by gonzalez.
+		   query will be --field 'title=*image+processing*&author=*gonzalez'
+		2) If search is for a book of image processing that is either in shelfno A5 of written by gonzalez.
+		   query will be --field 'title=*image+processing*&shelfno=A5|author=*gonzalez*'
+
+--proxy    : if under some proxy specify proxy field.
+	     eg :- --proxy 172.31.1.5
+
+--user     : if password authentication is required specify --user field.
+             password will be taken at runtime.
+             eg :- --user iit2008199
+
+--display  : specify the information that you want to be extracted
+	     by default (if --display is not specified) ['title','status','shelfno','reserved','lastissue']
+	     are displayed.
+ 	     1) for getting information about the books feed '&' seperated field name with --display argument.
+ 	        eg :- --display 'title&shelfno&status&edition&subjecttopics'
+ 	     2) for getting additional field along with default field. use '&' at the start of input.
+ 	        eg :- --display '&edition&classno&accno'
+ 
+--avail    : this will give the output sorted in the status. Available(Not issued) books will come first.
+	     eg :- --avail
+
+--pagesize : specify the number of books to be fetched in first request and so on.
+	     It's default value is 20.by default 20 books are displayed and waits for user to press <enter>
+	     to display next 20 books till no furthur books are found.
+             eg :- --pagesize 10
+             if pagesize is set to 10 initiall 10 book's information will be displayed and system will wait till 
+	     user press <enter> and then it displays the next 10 books and so on.
+
+--saveto   : if output to be redirected to some file specify this field along with filename. 
+             result will be saved in the given file.
+             eg :- --saveto info.txt
+
+sample query :- 1) (get all books of 'java' or whose writer is 'herbert schildt'. Available book should be displayed first.)
+	           eg :- ./query --field 'title=*java*|author=*herbert+schildt*' --avail
+		2) (get all books of 'java' and whose writer is 'herbert schildt'. Available book should be displayed first.)
+	           eg :- ./query --field 'title=*java*&author=*herbert+schildt*' --avail

@@ -1,0 +1,13 @@
+#!/bin/bash
+#Author -Anand Kumar
+#For easy searching of IIITA library
+#Only requirement is python that should be installed in your system
+#In order to know the instruction ON HOW TO USE IT .READ "manfile.txt".
+#Type :- ./query --help  -: for the instruction on how to use it.
+
+if python --version &> /dev/null;
+then
+	python query.py $*
+else
+	echo 'error: python not installed, first install it'
+fi
