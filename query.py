@@ -1,4 +1,4 @@
-import os,sys,getpass
+import os,sys,getpass,platform
 from easyquery import easyquery
 
 def showMenu() :
@@ -9,6 +9,11 @@ def showMenu() :
 		return
 	try :
 		for line in fd.readlines() :
+			try :
+				if platform.system() == "Windows" :
+					line = line.replace("'",'"')
+			except :
+				pass
 			sys.stdout.write(line)
 		fd.close()
 	except :
