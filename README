@@ -1,3 +1,6 @@
+Requirement :-
+Python 2 , latest is python2.7.2 (download from http://www.python.org/getit/releases/2.7.2/)
+
 IIITA Library search
 search for booklist. Sort it by their availability such that available books will come first. extract the required information.
 for detail information to how to use it read 'manfile.txt' or run the command.
